@@ -3,21 +3,33 @@ import time
 from graphics import *
 
 def main(): 
-   
-   win = GraphWin("This is a window", 500, 500, True)
-   R = Rectangle(Point(50,50),Point(100,100))
-   R.draw(win)
-   global closeX, closeY, mousePoint
-   mousePoint = win.getMouse()
-   closeY = mousePoint.getY()
-   closeX = mousePoint.getX()
-   while (((closeX >= 50) and (closeY >= 50)) and ((closeX<=  100) and (closeY <= 100))) != True:
-      start = time.time()
-      mousePoint = win.getMouse()
-      print(mousePoint)
-      closeY = mousePoint.getY()
-      closeX = mousePoint.getX()
-      print(time.time() - start)
-   win.close()
+   global exitButtonX, exitButtonY
+   global mouseX, mouseY, mousePoint
+   global win
+   exitButtonX = Point(0,0)
+   exitButtonY = Point(50,50)
+   win = GraphWin("D&D Dungeon Master Map", 500, 500, True)
+   displayExit(win, exitButtonX,exitButtonY)
+   setMouse()
+   while(not exitPressed()):
+      setMouse()
 
-main()
+def  displayExit(window,exitButtonX,exitButtonY):
+   exitButton = Rectangle(exitButtonX,exitButtonY)
+   window.draw(exitButton)
+
+def exitPressed():
+   if(((mouseX >= 0) and (mouseY >= 0)) and ((mouseX<=  50) and (mouseY<= 50))) == True:
+      return True
+   else:
+      return False
+
+def setMouse():
+   mousePoint = win.getMouse()
+   mouseX = mousePoint.getX()
+   mouseY = mousePoint.getY
+
+
+
+if __name__ == "__main__":
+   main()
